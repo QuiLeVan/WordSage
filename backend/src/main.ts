@@ -31,8 +31,17 @@ async function bootstrap() {
   app.enableCors();
 
   const PORT = 4000;
-  await app.listen(PORT);
-  console.log(`Application is running on port ${PORT}`);
+
+  try {
+    await app.listen(PORT);
+    console.log(`🚀 Application is running on port ${PORT}`);
+    console.log(
+      `📚 API Documentation available at: http://localhost:${PORT}/docs`,
+    );
+  } catch (error) {
+    console.error('❌ Failed to start application:', error);
+    process.exit(1);
+  }
 }
 
 bootstrap();
