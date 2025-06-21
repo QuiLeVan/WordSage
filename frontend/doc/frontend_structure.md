@@ -9,14 +9,21 @@ The WordSage Frontend is a comprehensive mobile application built with **React N
 - **Framework**: React Native 0.72.4
 - **Development Platform**: Expo SDK 49.0.5
 - **State Management**: Redux Toolkit 1.9.5
-- **Navigation**: React Navigation 6.1.7
+- **Navigation**: React Navigation 6.1.7 (Stack Navigator)
 - **HTTP Client**: Axios 1.4.0
 - **Storage**: AsyncStorage 1.18.2
 - **Animations**: Lottie React Native 5.1.6
 - **Text-to-Speech**: Expo Speech 11.3.0
 - **UI Components**: React Native Elements 3.4.3
 - **Icons**: Expo Vector Icons 13.0.0
-- **Language**: JavaScript (JSX) with TypeScript support
+- **Gesture Handling**: React Native Gesture Handler 2.12.1
+- **Reanimated**: React Native Reanimated 3.3.0  
+- **Safe Area**: React Native Safe Area Context 4.6.3
+- **Screens**: React Native Screens 3.22.0
+- **Masked View**: React Native Community Masked View 0.1.11
+- **Constants**: Expo Constants 14.4.2
+- **Status Bar**: Expo Status Bar 1.6.0
+- **Language**: JavaScript (JSX) with TypeScript 5.1.3 support
 
 ## Project Structure
 
@@ -28,43 +35,78 @@ frontend/
 ├── eas.json                        # Expo Application Services config
 ├── package.json                    # Dependencies and scripts
 ├── tsconfig.json                   # TypeScript configuration
+├── yarn.lock                       # Yarn dependency lock file
+├── package-lock.json               # npm dependency lock file
+├── .gitignore                      # Git ignore patterns
 └── src/
     ├── assets/                     # Images, icons, animations
     │   ├── adaptive-icon.png       # Android adaptive icon
     │   ├── celebration.json        # Lottie animation
-    │   ├── icon.png               # App icon
-    │   ├── splash1.png            # Splash screen
-    │   └── ...                    # Various UI assets
+    │   ├── confirmPassword.png     # Password confirmation icon
+    │   ├── facebook.png            # Facebook login icon
+    │   ├── favicon.png             # Web favicon
+    │   ├── google.png              # Google login icon
+    │   ├── icon.png                # App icon
+    │   ├── icon2.png               # Alternative app icon
+    │   ├── lock.png                # Lock/security icon
+    │   ├── logout.png              # Logout icon
+    │   ├── mail.png                # Email icon
+    │   ├── phone.png               # Phone icon
+    │   ├── profile.png             # Profile icon
+    │   ├── splash1.png             # Splash screen
+    │   ├── undraw-adventure-map-hnin-21.png # Illustration asset
+    │   └── user.png                # User icon
     ├── components/                 # Reusable UI components
-    │   ├── Question.jsx           # Quiz question component
-    │   └── Screen.jsx             # Base screen wrapper
+    │   ├── Question.jsx            # Quiz question component
+    │   └── Screen.jsx              # Base screen wrapper
     ├── constants/                  # App constants
-    │   ├── baseUrl.js             # API base URL
-    │   └── colors.js              # Color palette
+    │   ├── baseUrl.js              # API base URL
+    │   └── colors.js               # Color palette
     ├── features/                   # Redux slices and thunks
-    │   ├── auth/                  # Authentication state
-    │   ├── learn/                 # Learning state
-    │   ├── level-assessment/      # Level assessment state
-    │   ├── level-up-test/         # Level up test state
-    │   ├── profile/               # User profile state
-    │   ├── quiz/                  # Quiz state
-    │   └── store.js               # Redux store configuration
+    │   ├── auth/                   # Authentication state
+    │   ├── learn/                  # Learning state
+    │   ├── level-assessment/       # Level assessment state
+    │   ├── level-up-test/          # Level up test state
+    │   ├── profile/                # User profile state
+    │   ├── quiz/                   # Quiz state
+    │   ├── rootAction.js           # Root action types
+    │   └── store.js                # Redux store configuration
     ├── helpers/                    # Utility functions
-    │   ├── axiosInstance.js       # Configured Axios instance
-    │   ├── lessonStorage.js       # Lesson data storage
-    │   ├── tokenStorage.js        # Authentication token storage
-    │   └── userInfoStorage.js     # User information storage
+    │   ├── axiosInstance.js        # Configured Axios instance
+    │   ├── lessonStorage.js        # Lesson data storage
+    │   ├── tokenStorage.js         # Authentication token storage
+    │   └── userInfoStorage.js      # User information storage
     ├── hooks/                      # Custom React hooks
-    │   └── useCountdown.js        # Countdown timer hook
+    │   └── useCountdown.js         # Countdown timer hook
     ├── navigation/                 # Navigation configuration
-    │   └── AppNavigator.jsx       # Main navigation structure
+    │   └── AppNavigator.jsx        # Main navigation structure
     └── screens/                    # Screen components
-        ├── auth/                  # Authentication screens
-        ├── learn/                 # Learning screens
-        ├── level-assessment/      # Level assessment screens
-        ├── levelUp-test/          # Level up test screens
-        ├── quiz/                  # Quiz screens
-        └── shared/                # Shared/common screens
+        ├── auth/                   # Authentication screens
+        │   ├── LoginScreen.jsx     # User login screen
+        │   └── RegistrationScreen.jsx # User registration screen
+        ├── learn/                  # Learning screens
+        │   ├── LessonDetailsScreen.jsx # Lesson details view
+        │   ├── LessonListScreen.jsx    # Lessons overview
+        │   ├── StartLearningPrompt.jsx # Learning onboarding
+        │   └── WordScreen.jsx          # Word learning interface
+        ├── level-assessment/       # Level assessment screens
+        │   ├── LevelAssessmentPrompt.jsx  # Assessment intro
+        │   ├── LevelAssessmentResult.jsx  # Assessment results
+        │   └── LevelAssessmentScreen.jsx  # Assessment test
+        ├── levelUp-test/           # Level up test screens
+        │   ├── LevelUpTestPrompt.jsx   # Level up test intro
+        │   ├── LevelUpTestResult.jsx   # Level up results
+        │   └── LevelUpTestScreen.jsx   # Level up test
+        ├── quiz/                   # Quiz screens
+        │   ├── QuizPromptScreen.jsx    # Quiz introduction
+        │   ├── QuizResultScreen.jsx    # Quiz results
+        │   └── QuizScreen.jsx          # Quiz interface
+        └── shared/                 # Shared/common screens
+            ├── FinishMessage.jsx       # Completion messaging
+            ├── HomeScreen.jsx          # Main dashboard
+            ├── LoadingScreen.jsx       # Loading state
+            ├── ProfileScreen.jsx       # User profile
+            └── WordOfTheDayScreen.jsx  # Daily vocabulary
 ```
 
 ## Core Application Architecture
@@ -409,7 +451,7 @@ Handles quiz sessions, question management, and result tracking.
 ## API Integration
 
 ### Base Configuration
-- **Base URL**: Configured via constants/baseUrl.js
+- **Base URL**: Configured via constants/baseUrl.js (example: "http://192.168.31.72:4000")
 - **Authentication**: Automatic JWT token handling
 - **Error Handling**: Consistent error processing across the app
 
@@ -424,21 +466,65 @@ Handles quiz sessions, question management, and result tracking.
 ### app.json - Expo App Configuration
 ```json
 {
-  "name": "WordSage",
-  "slug": "wordsage",
-  "version": "1.0.0",
-  "orientation": "portrait",
-  "icon": "./src/assets/icon2.png",
-  "splash": {
-    "image": "./src/assets/splash1.png",
-    "backgroundColor": "#3988FF"
+  "expo": {
+    "name": "WordSage",
+    "slug": "wordsage",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon2.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/splash1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#3988FF"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.neaz.wordsage"
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f6c476f2-d194-4ce6-bc9c-32a61b1562ba"
+      }
+    },
+    "owner": "neaz"
+  }
+}
+```
+
+### eas.json - Expo Application Services Configuration
+```json
+{
+  "cli": {
+    "version": ">= 4.1.2"
   },
-  "ios": { "supportsTablet": true },
-  "android": {
-    "package": "com.neaz.wordsage",
-    "adaptiveIcon": {
-      "foregroundImage": "./src/assets/adaptive-icon.png"
-    }
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {}
   }
 }
 ```
@@ -448,7 +534,11 @@ Handles quiz sessions, question management, and result tracking.
 - **Platform Support**: iOS and Android configurations
 - **Asset Management**: Icons, splash screens, and images
 - **Orientation**: Portrait-only interface
+- **User Interface Style**: Light mode interface
 - **Adaptive Icons**: Android adaptive icon support
+- **Web Support**: Favicon and web configuration
+- **EAS Integration**: Expo Application Services project ID
+- **Build Configurations**: Multiple build profiles for different environments
 
 ## Development Workflow
 
@@ -463,6 +553,7 @@ Handles quiz sessions, question management, and result tracking.
 - **Metro Bundler**: JavaScript bundler with hot reload
 - **React Native Debugger**: Development debugging tools
 - **Expo DevTools**: Browser-based development tools
+- **EAS CLI**: Expo Application Services command-line tool
 
 ### Testing and Debugging
 - **Console Logging**: Comprehensive logging throughout the app
@@ -533,7 +624,11 @@ Handles quiz sessions, question management, and result tracking.
 ## Deployment and Distribution
 
 ### Build Configuration
-- **EAS Build**: Expo Application Services for app builds
+- **EAS Build**: Expo Application Services for app builds with multiple profiles:
+  - **Preview**: APK builds for testing
+  - **Preview2**: Release builds using Gradle
+  - **Preview3**: Development client builds
+  - **Production**: Production builds
 - **Platform Builds**: Separate iOS and Android configurations
 - **Asset Bundling**: Optimized asset packaging
 - **Version Management**: Automated version handling
@@ -579,5 +674,35 @@ Handles quiz sessions, question management, and result tracking.
 - **Usage Analytics**: User behavior analysis
 - **Performance Metrics**: App performance monitoring
 - **User Feedback**: In-app feedback collection
+
+## Troubleshooting
+
+### Common Issues
+
+#### GraphQL Entity Authorization Errors
+If you encounter GraphQL authorization errors like:
+```
+[GraphQL] Entity not authorized: AppEntity[...] (viewer = RegularUserViewerContext[...], action = READ, ruleIndex = -1)
+```
+
+**Potential Solutions:**
+- Verify that the user account has proper permissions
+- Check if the EAS project ID matches your Expo account
+- Ensure the project is properly linked to your Expo organization
+- Review the `extra.eas.projectId` in `app.json` configuration
+- Try logging out and logging back into your Expo account
+
+#### Development Server Issues
+- **Metro bundler errors**: Clear cache with `expo start --clear`
+- **Dependencies issues**: Delete `node_modules` and reinstall with `npm install` or `yarn install`
+- **Platform-specific errors**: Try `expo start --ios` or `expo start --android` for specific platforms
+
+#### Build Issues
+- **EAS Build failures**: Check the EAS build logs for specific error messages
+- **Asset issues**: Ensure all assets referenced in `app.json` exist in the correct paths
+- **Configuration errors**: Validate `app.json` and `eas.json` syntax
+
+- Expo setup project, then copy cli like this to terminal and run
+`npm install --global eas-cli && eas init --id xxxx`
 
 This documentation provides a comprehensive overview of the WordSage mobile application architecture, making it easier for developers to understand, maintain, and extend the mobile learning platform. 
